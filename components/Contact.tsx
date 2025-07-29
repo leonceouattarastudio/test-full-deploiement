@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { 
   Mail, 
   Phone, 
@@ -14,11 +15,9 @@ import {
   Linkedin,
   Twitter
 } from 'lucide-react';
-import AppointmentModal from './appointment/AppointmentModal';
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,6 +28,7 @@ const Contact = () => {
     rgpd: false
   });
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const router = useRouter();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -354,7 +354,7 @@ const Contact = () => {
                   Préférez-vous discuter de vive voix ? Réservez un créneau de 30 minutes gratuit pour échanger sur votre projet.
                 </p>
                 <button 
-                  onClick={() => setIsAppointmentModalOpen(true)}
+                  onClick={() => router.push('/booking?type=reservation')}
                   className="btn-primary px-6 py-3 rounded-lg text-white font-medium flex items-center space-x-2"
                 >
                   <Calendar className="w-5 h-5" />
@@ -366,12 +366,6 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Appointment Modal */}
-      <AppointmentModal
-        isOpen={isAppointmentModalOpen}
-        onClose={() => setIsAppointmentModalOpen(false)}
-        triggerType="reservation"
-      />
     </section>
   );
 };

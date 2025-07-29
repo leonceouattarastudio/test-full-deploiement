@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { 
   Code, 
   Smartphone, 
@@ -20,11 +21,10 @@ import {
   Clock,
   Euro
 } from 'lucide-react';
-import AppointmentModal from './appointment/AppointmentModal';
 
 const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -356,7 +356,7 @@ const Services = () => {
                     
                     <button 
                       className="w-full py-3 px-6 bg-gradient-to-r from-[#00F5FF]/20 to-[#9D4EDD]/20 border border-[#00F5FF]/30 rounded-xl text-[#00F5FF] hover:bg-gradient-to-r hover:from-[#00F5FF]/30 hover:to-[#9D4EDD]/30 hover:border-[#00F5FF]/50 transition-all duration-300 flex items-center justify-center space-x-2 group/btn"
-                      onClick={() => setIsAppointmentModalOpen(true)}
+                      onClick={() => router.push('/booking?type=devis')}
                     >
                       <span className="font-medium">Demander un devis</span>
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -440,7 +440,7 @@ const Services = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <button 
                     className="btn-primary px-8 py-4 rounded-full text-white font-semibold flex items-center space-x-3 group/btn relative overflow-hidden"
-                    onClick={() => setIsAppointmentModalOpen(true)}
+                    onClick={() => router.push('/booking?type=devis')}
                   >
                     <span className="relative z-10">Demander un devis</span>
                     <ArrowRight className="w-5 h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
@@ -458,12 +458,6 @@ const Services = () => {
         </div>
       </div>
 
-      {/* Appointment Modal */}
-      <AppointmentModal
-        isOpen={isAppointmentModalOpen}
-        onClose={() => setIsAppointmentModalOpen(false)}
-        triggerType="devis"
-      />
     </section>
   );
 };

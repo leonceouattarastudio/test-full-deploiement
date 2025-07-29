@@ -15,12 +15,10 @@ import {
   TrendingUp,
   Shield
 } from 'lucide-react';
-import AppointmentModal from './appointment/AppointmentModal';
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
-  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {

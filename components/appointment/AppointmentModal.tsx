@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { X, Calendar, Clock, MapPin, User, Mail, Phone, Building, ChevronLeft, ChevronRight, Check, Star, Filter, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -34,6 +35,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onClose, tr
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [serviceFilter, setServiceFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -200,8 +202,8 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onClose, tr
       client: formData
     });
     
-    // Fermer le modal après succès
-    onClose();
+    // Rediriger vers la page d'accueil après succès
+    router.push('/?success=appointment');
     
     // Reset
     setCurrentStep(1);

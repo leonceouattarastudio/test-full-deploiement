@@ -13,11 +13,9 @@ import {
   CheckCircle,
   Target
 } from 'lucide-react';
-import AppointmentModal from './appointment/AppointmentModal';
 
 const Sectors = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -240,12 +238,6 @@ const Sectors = () => {
         </div>
       </div>
 
-      {/* Appointment Modal */}
-      <AppointmentModal
-        isOpen={isAppointmentModalOpen}
-        onClose={() => setIsAppointmentModalOpen(false)}
-        triggerType="rdv"
-      />
     </section>
   );
 };
