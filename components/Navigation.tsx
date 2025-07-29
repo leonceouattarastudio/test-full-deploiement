@@ -1,15 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Menu, X, Code, Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
-import AppointmentModal from './appointment/AppointmentModal';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const router = useRouter();
 
   const navItems = [
     { id: 'hero', label: 'Accueil' },
@@ -18,6 +18,7 @@ const Navigation = () => {
     { id: 'sectors', label: 'Secteurs' },
     { id: 'projects', label: 'Projets' },
     { id: 'blog', label: 'Blog' },
+    { id: 'booking', label: 'RDV' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -73,13 +74,17 @@ const Navigation = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offsetTop = element.offsetTop - 80; // Offset pour la navigation sticky
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
+    if (sectionId === 'booking') {
+      router.push('/booking');
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offsetTop = element.offsetTop - 80; // Offset pour la navigation sticky
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
     }
     setIsOpen(false);
   };
@@ -188,7 +193,7 @@ const Navigation = () => {
 
               {/* Bouton CTA */}
               <button 
-                onClick={() => setIsAppointmentModalOpen(true)}
+                onClick={() => router.push('/booking')}
                 className="relative px-6 py-2 bg-gradient-to-r from-[#00F5FF] to-[#9D4EDD] rounded-full text-white font-medium text-sm overflow-hidden group hover:shadow-lg hover:shadow-[#00F5FF]/25 transition-all duration-300"
               >
                 <span className="relative z-10">Prendre RDV</span>
@@ -267,7 +272,7 @@ const Navigation = () => {
               {/* CTA Mobile */}
               <button 
                 onClick={() => {
-                  setIsAppointmentModalOpen(true);
+                  router.push('/booking');
                   setIsOpen(false);
                 }}
                 className="w-full mt-4 py-3 bg-gradient-to-r from-[#00F5FF] to-[#9D4EDD] rounded-xl text-white font-medium overflow-hidden group relative"
@@ -287,13 +292,6 @@ const Navigation = () => {
           onClick={() => setIsOpen(false)}
         />
       )}
-
-      {/* Appointment Modal */}
-      <AppointmentModal
-        isOpen={isAppointmentModalOpen}
-        onClose={() => setIsAppointmentModalOpen(false)}
-        triggerType="rdv"
-      />
     </>
   );
 };
