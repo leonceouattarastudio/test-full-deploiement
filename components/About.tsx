@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
 import { 
   Code, 
   Users, 
@@ -17,9 +16,7 @@ import {
 } from 'lucide-react';
 
 const About = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
-  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -377,6 +374,9 @@ const About = () => {
                       if (contactSection) {
                         contactSection.scrollIntoView({ behavior: 'smooth' });
                       }
+                      if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: 'smooth' });
+                      }
                     }}
                     className="btn-primary px-8 py-4 rounded-full text-white font-semibold flex items-center space-x-3 mx-auto group/btn relative overflow-hidden"
                   >
@@ -384,13 +384,6 @@ const About = () => {
                     <ArrowRight className="w-5 h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
                     <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
                   </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </section>
   );
 };
