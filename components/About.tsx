@@ -391,12 +391,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* Appointment Modal */}
-      <AppointmentModal
-        isOpen={isAppointmentModalOpen}
-        onClose={() => setIsAppointmentModalOpen(false)}
-        triggerType="devis"
-      />
     </section>
   );
 };
